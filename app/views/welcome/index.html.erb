@@ -1,0 +1,45 @@
+<div class="container-fluid">
+  <section id="intro">
+    <div class="curtain">
+      <ul class="row">
+        <li class="col-md-2"></li>
+        <li class="col-md-2"></li>
+        <li class="col-md-2"></li>
+        <li class="col-md-2"></li>
+        <li class="col-md-2"></li>
+        <li class="col-md-2"></li>
+      </ul>
+    </div>
+  	
+  </section>
+  <h1>What's hAPPening?!?!</h1>
+  <h2>Get Event Listings around Me</h2>
+  <section id="eventsMap">
+    <div class="row">
+      <main class="col-md-9 map-container">
+        <div id="map-canvas" style="width: 1000px; height: 700px;">
+          <!-- <div class="vertical-align">
+            <i class="fa fa-spinner fa-spin fa-5x"></i>
+          </div> -->
+        </div>
+      </main><!--map-container -->
+      <aside>
+        <h3 id="status"></h3>
+        <div id="eventList">
+          <% if @events %>
+            <ul>
+            <% @events.each do |event| %>
+              <li class="event">
+                <ul>
+                  <li><a href="<%= event.details_url %>"><%= event.name %></a></li>
+                </ul>
+              </li>
+            <% end %>
+            </ul>
+          <% end %>
+        </div>
+        <div class="error-message"></div>
+      </aside>
+    </div>
+  </section>
+</div><!--container fluid -->
