@@ -1,3 +1,187 @@
-// Place all the styles related to the welcome controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+body {
+	background-color: #000;
+	font-family: 'Raleway', sans-serif;
+	font-size: 16px;
+	color: #E50099;
+}
+h1{
+	font-family: 'Monofett', cursive;
+	font-size: 7rem;
+}
+ul {
+	list-style: none;
+}
+
+#intro {
+	position: relative;
+	widows: 100%;
+	height: 100vh;
+	min-height: 100%;
+	margin: 0px;
+	padding: 0px;
+	background-color: #000000;
+	opacity: 1;
+	transition: all 0.8s;
+
+	&.off {
+		opacity: 0;
+		transition: all 0.8s;
+	}
+	*  {
+	 transition: all 0.8s;
+	}
+	.banner {
+		position: absolute;
+		z-index: 100;
+		top: 10%;
+		left: 30%;
+		width: 600px;
+		height: 600px;
+		border-radius: 50%;
+		background-color: rgba(0,0,0,0.7);
+		border: 10px solid #E50099;
+		 box-shadow: 7px 7px 5px rgba(0,0,0,0.7);;
+		padding-top: 150px;
+		text-align: center;
+		cursor: pointer;
+	}
+	ul {
+		position: relative;
+		z-index: 10;
+		overflow: hidden;
+	}
+	li {
+		position: relative;
+		padding: 10px;
+		height: 100vh;
+		min-height: 100%;
+		transition: all 0.8s;
+		span{
+			position: absolute;
+			top: 0;
+			display: block;
+			width: 100%;
+			height: 100%;
+			background-size: cover;
+			background-repeat: repeat-x;
+			background-position: middle center;
+			transition: all 0.8s;
+			animation: animatedBackground 200s linear infinite;
+			-moz-animation: animatedBackground 200s linear infinite;
+			-webkit-animation: animatedBackground 200s linear infinite;
+			-ms-animation: animatedBackground 200s linear infinite;
+			-o-animation: animatedBackground 200s linear infinite;
+			&.one {
+				transition: all 0.8s;
+				background-image: image-url("1.jpg");
+				&.out {
+					top: -100%;
+					transition: all 0.8s;
+				}
+			}
+			&.two {
+				transition: all 0.8s;	
+			background-image: image-url("2.jpg");
+			animation: anime 70s linear infinite;
+			-moz-animation: anime 70s linear infinite;
+			-webkit-animation: anime 70s linear infinite;
+			-ms-animation: anime 70s linear infinite;
+			-o-animation: anime 70s linear infinite;
+				&.out {
+					top: 200%;
+					transition: all 0.8s;
+				}
+			}
+			&.three {
+				transition: all 0.8s;
+			background-image: image-url("3.jpg");
+			animation: animatedBackground 100s linear infinite;
+			-moz-animation: animatedBackground 100s linear infinite;
+			-webkit-animation: animatedBackground 100s linear infinite;
+			-ms-animation: animatedBackground 100s linear infinite;
+			-o-animation: animatedBackground 100s linear infinite;
+				&.out {
+					top: 100%;
+					transition: all 0.8s;
+				}
+			}
+			&.four {
+				transition: all 0.8s;
+			background-image: image-url("4.jpg");
+				&.out {
+					top: -100%;
+					transition: all 0.8s;
+				}
+			}
+			&.five {
+				transition: all 0.8s;
+			background-image: image-url("5.jpg");
+				&.out {
+					top: 100%;
+					transition: all 0.8s;
+				}
+			}
+			&.six {
+				transition: all 0.8s;
+			background-image: image-url("6.jpg");
+			animation: anime 50s linear infinite;
+			-moz-animation: anime 50s linear infinite;
+			-webkit-animation: anime 50s linear infinite;
+			-ms-animation: anime 50s linear infinite;
+			-o-animation: anime 50s linear infinite;
+				&.out {
+					top: 150%;
+					transition: all 0.8s;
+				}
+			}
+		}//span
+		@keyframes animatedBackground {
+			0% { background-position: 0 0; }
+			100% { background-position: -3000px 0; }
+		}
+		@-moz-keyframes animatedBackground {
+			0% { background-position: 0 0; }
+			100% { background-position: -3000px 0; }
+		}
+		@-webkit-keyframes animatedBackground {
+			0% { background-position: 0 0; }
+			100% { background-position: -3000px 0; }
+		}
+		@-ms-keyframes animatedBackground {
+			0% { background-position: 0 0; }
+			100% { background-position: -3000px 0; }
+		}
+		@-o-keyframes animatedBackground {
+			0% { background-position: 0 0; }
+			100% { background-position: -3000px 0; }
+		}
+		@keyframes anime {
+			0% { background-position: 0 0; }
+			50% { background-position-y: 20px;}
+			100% { background-position: 500px 0; }
+		}
+		@-moz-keyframes anime {
+			0% { background-position: 0 0; }
+			50% { background-position-y: 20px;}
+			100% { background-position: 500px 0; }
+		}
+		@-webkit-keyframes anime {
+			0% { background-position: 0 0; }
+			50% { background-position-y: 20px;}
+			100% { background-position: 500px 0; }
+		}
+		@-ms-keyframes anime {
+			0% { background-position: 0 0; }
+			50% { background-position-y: 20px;}
+			100% { background-position: 500px 0; }
+		}
+		@-o-keyframes anime {
+			0% { background-position: 0 0; }
+			50% { background-position-y: 20px;}
+			100% { background-position: 500px 0; }
+		}
+	}
+}
+#eventsMap{
+	height: 100vh;
+}

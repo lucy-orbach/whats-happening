@@ -1,5 +1,22 @@
 $(document).ready(function(){
-  getMap();
+    
+    getMap();
+  $('.banner').click( function(){
+    $('.pic').addClass('out')
+
+    function showmap() {     
+    $("#intro").fadeOut(700);
+    $('html,body').animate( { scrollTop:$("#eventsMap").offset().top } ,600);
+ }
+
+    setTimeout(showmap, 1000)
+
+    //$("#intro").addClass('off');
+
+    //
+
+    
+  });
 });
 
 function getMap () {
@@ -8,7 +25,7 @@ function getMap () {
   function initialize() {
     var mapCanvas = document.getElementById('map-canvas');
     var mapOptions = {
-      zoom: 14,
+      zoom: 15,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     }
     map = new google.maps.Map( mapCanvas, mapOptions );
@@ -60,10 +77,9 @@ function getMap () {
 
 
 function getEvents(pos, map) {
-    console.log("inside getevents");
     var lat = pos.A.toString();
     var lon = pos.F.toString();
-    var url = "http://api.nytimes.com/svc/events/v2/listings.jsonp?&ll="+lat+","+lon+"&radius=5000&limit=20&api-key=58cc54cbffd5159ec6d8eec69468ca3c%3A10%3A63158134"
+    var url = "http://api.nytimes.com/svc/events/v2/listings.jsonp?&ll="+lat+","+lon+"&radius=5000&api-key=58cc54cbffd5159ec6d8eec69468ca3c%3A10%3A63158134"
     //gets data from api
     function getEventsData(){
         $.ajax({
@@ -75,11 +91,12 @@ function getEvents(pos, map) {
                 setTags(array);
         });
     }//getEventData
+
     //position tags on map
     function setTags(array){
-        console.log('inside settags');
         var marker, i;
         for (i = 0; i < array.length; i++) {  
+            
             marker = new google.maps.Marker({
                 position: new google.maps.LatLng(array[i].geocode_latitude, array[i].geocode_longitude),
                 map: map
@@ -87,12 +104,43 @@ function getEvents(pos, map) {
 
             google.maps.event.addListener(marker, 'click', (function(marker, i) {
                 return function() {
-                    infowindow.setContent(array[i].event_name);
-                    infowindow.open(map, marker);
+                    map.setZoom(17);
+                    map.setCenter( marker.getPosition());
+                    // var infowindow = new google.maps.InfoWindow({
+                    //             map: map,
+                    //             position: marker.getPosition()
+                    //         });
+                    // infowindow.setContent(
+                    //     array[i].event_name, 
+                    //     array[i].event_detail_url,
+                    //     array[i].date_time_description,
+                    //     array[i].price);
+                var infoBubble = new google.maps.InfoWindow({
+                    map: map,
+                    content: '<ul class="bubbke"><li><a href="'+array[i].event_detail_url+'" target="_new" >'+array[i].event_name+'</a></li><li>'+array[i].date_time_description+'</li></ul>',
+                    position: marker.getPosition(),
+                    shadowStyle: 1,
+                    padding: 0,
+                    backgroundColor: 'rgb(229, 0, 153)',
+                    borderRadius: 5,
+                    arrowSize: 10,
+                    borderWidth: 1,
+                    borderColor: '#000000',
+                    disableAutoPan: true,
+                    hideCloseButton: true,
+                    arrowPosition: 30,
+                    backgroundClassName: 'transparent',
+                    arrowStyle: 2
+                });
+
+                    infoWindow.open(map, marker);
+
+
+
+                    
                 }
             })(marker, i));
         }//for
-        console.log('is it done?')
     }//setTags
  
     getEventsData();
