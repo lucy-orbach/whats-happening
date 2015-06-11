@@ -79,7 +79,7 @@ function getMap () {
 function getEvents(pos, map) {
     var lat = pos.A.toString();
     var lon = pos.F.toString();
-    var url = "http://api.nytimes.com/svc/events/v2/listings.jsonp?&ll="+lat+","+lon+"&radius=5000&api-key=58cc54cbffd5159ec6d8eec69468ca3c%3A10%3A63158134"
+    var url = "https://api.nytimes.com/svc/events/v2/listings.jsonp?&ll="+lat+","+lon+"&radius=5000&api-key=58cc54cbffd5159ec6d8eec69468ca3c%3A10%3A63158134"
     //gets data from api
     function getEventsData(){
         $.ajax({
