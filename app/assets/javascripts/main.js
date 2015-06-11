@@ -104,7 +104,7 @@ function getEvents(pos, map) {
 
             google.maps.event.addListener(marker, 'click', (function(marker, i) {
                 return function() {
-                    map.setZoom(17);
+                    map.setZoom(15);
                     map.setCenter( marker.getPosition());
                     // var infowindow = new google.maps.InfoWindow({
                     //             map: map,
