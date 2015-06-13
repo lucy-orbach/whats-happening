@@ -11,29 +11,59 @@ h1{
 ul {
 	list-style: none;
 }
-
-#intro {
+ul.accordion {
 	position: relative;
-	widows: 100%;
+	z-index: 110;
+	overflow: hidden;
+	li {
+		position: relative;
+		padding: 10px;
+		height: 100vh;
+		min-height: 100%;
+		transition: all 0.8s;
+		span {
+			position: absolute;
+			top: 0;
+			display: block;
+			width: 100%;
+			height: 100%;
+			transition: all 0.8s;
+			&.out {
+				transition: all 0.8s;
+			}//out
+		}//span
+	}//li
+}//accordion
+.container-fluid {
+	position: relative;
+}
+.wrapper, #intro,
+.transition, #eventsMap {
+	width: 100%;
 	height: 100vh;
 	min-height: 100%;
 	margin: 0px;
 	padding: 0px;
+}
+.wrapper {
+	position: fixed;
+	z-index: 100;
+	overflow: hidden;
+}
+#intro {
+	position: relative;
+	z-index: 300;
 	background-color: #000000;
 	opacity: 1;
 	transition: all 0.8s;
-
 	&.off {
 		opacity: 0;
 		transition: all 0.8s;
-	}
-	*  {
-	 transition: all 0.8s;
-	}
+	}//off
 	.banner {
 		position: absolute;
-		z-index: 100;
-		top: 10%;
+		z-index: 350;
+		top: 7%;
 		left: 30%;
 		width: 600px;
 		height: 600px;
@@ -44,97 +74,70 @@ ul {
 		padding-top: 150px;
 		text-align: center;
 		cursor: pointer;
-	}
-	ul {
-		position: relative;
-		z-index: 10;
-		overflow: hidden;
-	}
-	li {
-		position: relative;
-		padding: 10px;
-		height: 100vh;
-		min-height: 100%;
+	}//banner
+	li span {
+		background-size: cover;
+		background-repeat: repeat-x;
+		background-position: middle center;
 		transition: all 0.8s;
-		span{
-			position: absolute;
-			top: 0;
-			display: block;
-			width: 100%;
-			height: 100%;
-			background-size: cover;
-			background-repeat: repeat-x;
-			background-position: middle center;
-			transition: all 0.8s;
-			animation: animatedBackground 200s linear infinite;
-			-moz-animation: animatedBackground 200s linear infinite;
-			-webkit-animation: animatedBackground 200s linear infinite;
-			-ms-animation: animatedBackground 200s linear infinite;
-			-o-animation: animatedBackground 200s linear infinite;
-			&.one {
-				transition: all 0.8s;
-				background-image: image-url("1.jpg");
-				&.out {
-					top: -100%;
-					transition: all 0.8s;
-				}
+		animation: animatedBackground 200s linear infinite;
+		-moz-animation: animatedBackground 200s linear infinite;
+		-webkit-animation: animatedBackground 200s linear infinite;
+		-ms-animation: animatedBackground 200s linear infinite;
+		-o-animation: animatedBackground 200s linear infinite;
+		&.one {
+			background-image: image-url("1.jpg");
+			&.out {
+				top: -100%;
 			}
-			&.two {
-				transition: all 0.8s;	
+		}//one
+		&.two {
 			background-image: image-url("2.jpg");
 			animation: anime 70s linear infinite;
 			-moz-animation: anime 70s linear infinite;
 			-webkit-animation: anime 70s linear infinite;
 			-ms-animation: anime 70s linear infinite;
 			-o-animation: anime 70s linear infinite;
-				&.out {
-					top: 200%;
-					transition: all 0.8s;
-				}
+			&.out {
+				top: 200%;
 			}
-			&.three {
-				transition: all 0.8s;
+		}//two
+		&.three {
 			background-image: image-url("3.jpg");
 			animation: animatedBackground 100s linear infinite;
 			-moz-animation: animatedBackground 100s linear infinite;
 			-webkit-animation: animatedBackground 100s linear infinite;
 			-ms-animation: animatedBackground 100s linear infinite;
 			-o-animation: animatedBackground 100s linear infinite;
-				&.out {
-					top: 100%;
-					transition: all 0.8s;
-				}
+			&.out {
+				top: 100%;
 			}
-			&.four {
-				transition: all 0.8s;
+		}//three
+		&.four {
 			background-image: image-url("4.jpg");
-				&.out {
-					top: -100%;
-					transition: all 0.8s;
-				}
+			&.out {
+				top: -100%;
 			}
-			&.five {
-				transition: all 0.8s;
+		}//four
+		&.five {
 			background-image: image-url("5.jpg");
-				&.out {
-					top: 100%;
-					transition: all 0.8s;
-				}
+			&.out {
+				top: 100%;
 			}
-			&.six {
-				transition: all 0.8s;
+		}//five
+		&.six {
 			background-image: image-url("6.jpg");
 			animation: anime 50s linear infinite;
 			-moz-animation: anime 50s linear infinite;
 			-webkit-animation: anime 50s linear infinite;
 			-ms-animation: anime 50s linear infinite;
 			-o-animation: anime 50s linear infinite;
-				&.out {
-					top: 150%;
-					transition: all 0.8s;
-				}
+			&.out {
+				top: 150%;
 			}
-		}//span
+		}//six
+	}//span
+	//keyframes
 		@keyframes animatedBackground {
 			0% { background-position: 0 0; }
 			100% { background-position: -3000px 0; }
@@ -180,8 +183,41 @@ ul {
 			50% { background-position-y: 20px;}
 			100% { background-position: 500px 0; }
 		}
+	//keyframes ends	
+}//intro
+.transition {
+	z-index: 200;
+	span {
+		background-color: #000;
+	}	
+}
+.wrapper.out {
+	.transition {
+		span {
+			transition: all 1.8s;
+		}
+		.one {
+				top: 100%;
+		}//one
+		.two {
+				top: -100%;
+		}//two
+		.three {
+				top: -120%;
+		}//three
+		.four {
+				top: 105%;
+		}//four
+		.five {
+				top: -110%;
+		}//five
+		.six {
+				top: 100%;
+		}//six
 	}
 }
 #eventsMap{
+	z-index: 0;
 	height: 100vh;
 }
+

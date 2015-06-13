@@ -1,23 +1,34 @@
 $(document).ready(function(){
-    
+    showElement( $('.banner') );
     getMap();
-  $('.banner').click( function(){
-    $('.pic').addClass('out')
-
-    function showmap() {     
-    $("#intro").fadeOut(700);
-    $('html,body').animate( { scrollTop:$("#eventsMap").offset().top } ,600);
- }
-
-    setTimeout(showmap, 1000)
-
-    //$("#intro").addClass('off');
-
-    //
-
+    $('.banner').click(introAnimation);
+  
     
-  });
-});
+});//document ready
+
+function showElement(element) {
+    element.hide().delay( 400 ).fadeIn('slow');
+}
+function hideElement(element) {
+    element.delay( 400 ).fadeOut('slow');
+}
+
+function introAnimation (){
+    $('.pic').addClass('out');
+    hideElement( $('.banner') );
+
+    function showmap() { 
+        hideElement($("#intro"));
+        setTimeout(transit, 400);
+        //$('html,body').animate( { scrollTop:$("#eventsMap").offset().top } ,600);
+    }
+    function transit(){
+      $('.wrapper').addClass('out');
+      // .delay( 2000 ).fadeOut();
+    }
+
+    setTimeout(showmap, 1000);
+}
 
 function getMap () {
     var map;
@@ -74,7 +85,6 @@ function getMap () {
   google.maps.event.addDomListener(window, 'load', initialize);
 
 } //getMap
-
 
 function getEvents(pos, map) {
     var lat = pos.A.toString();

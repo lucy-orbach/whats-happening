@@ -1,37 +1,50 @@
 <div class="container-fluid">
-  <section id="intro">
-    <div class="curtain">
-      <section class="banner">
-      <h1>What's hAPPening?!?!</h1>
-      <h2>Get Event Listings around Me</h2>
-      </section>
-      <ul class="row">
-        <li class="col-md-2"><span class="pic one"></span></li>
-        <li class="col-md-2"><span class="pic two"></span></li>
-        <li class="col-md-2"><span class="pic three"></span></li>
-        <li class="col-md-2"><span class="pic four"></span></li>
-        <li class="col-md-2"><span class="pic five"></span></li>
-        <li class="col-md-2"><span class="pic six"></span></li>
-      </ul>
+
+  <div class="wrapper">
+    <section id="intro" class="fixed">
+      <div class="curtain">
+        <section class="banner">
+        <h1>Wass hAPPening?!?!</h1>
+        <h2> >> Click Here << </h2>
+        <h2>To Get Event Listings around You</h2>
+        </section>
+        <ul class="row accordion">
+          <li class="col-md-2"><span class="pic one"></span></li>
+          <li class="col-md-2"><span class="pic two"></span></li>
+          <li class="col-md-2"><span class="pic three"></span></li>
+          <li class="col-md-2"><span class="pic four"></span></li>
+          <li class="col-md-2"><span class="pic five"></span></li>
+          <li class="col-md-2"><span class="pic six"></span></li>
+        </ul>
+      </div>
+    </section>
+
+    <ul class="row accordion transition">
+      <li class="col-md-2"><span class="one"></span></li>
+      <li class="col-md-2"><span class="two"></span></li>
+      <li class="col-md-2"><span class="three"></span></li>
+      <li class="col-md-2"><span class="four"></span></li>
+      <li class="col-md-2"><span class="five"></span></li>
+      <li class="col-md-2"><span class="six"></span></li>
     </div>
-  	
-  </section>
-  
-  <section id="eventsMap">
-  <h1>What's hAPPening?!?!</h1>
-    <div class="row">
-      <main class="col-md-12 map-container">
-        <div id="map-canvas" style="width: 100%x; height: 600px;">
-          <!-- <div class="vertical-align">
-            <i class="fa fa-spinner fa-spin fa-5x"></i>
-          </div> -->
+
+      <section id="eventsMap">
+        <h1>Wass happening?!?!</h1>
+        <div class="row">
+          <main class="col-md-12 map-container">
+            <div id="map-canvas" style="width: 100%x; height: 600px;">
+              <!-- <div class="vertical-align">
+                <i class="fa fa-spinner fa-spin fa-5x"></i>
+              </div> -->
+            </div>
+          </main><!--map-container -->
+          <aside>
+            <h3 id="status"></h3>
+            
+            <div class="error-message"></div>
+          </aside>
         </div>
-      </main><!--map-container -->
-      <aside>
-        <h3 id="status"></h3>
-        
-        <div class="error-message"></div>
-      </aside>
+      </section>
     </div>
-  </section>
+  </div>
 </div><!--container fluid -->
