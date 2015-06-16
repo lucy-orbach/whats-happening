@@ -49,6 +49,9 @@ ul.accordion {
 	position: fixed;
 	z-index: 100;
 	overflow: hidden;
+	&.out {
+		display: none;
+	}
 }
 #intro {
 	position: relative;

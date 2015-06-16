@@ -1,9 +1,7 @@
 $(document).ready(function(){
-    showElement( $('.banner') );
     getMap();
+    showElement( $('.banner') );
     $('.banner').click(introAnimation);
-  
-    
 });//document ready
 
 function showElement(element) {
@@ -30,7 +28,7 @@ function introAnimation (){
     setTimeout(showmap, 1000);
 }
 
-function getMap () {
+function getMap() {
     var map;
     
   function initialize() {
@@ -40,7 +38,6 @@ function getMap () {
       mapTypeId: google.maps.MapTypeId.ROADMAP
     }
     map = new google.maps.Map( mapCanvas, mapOptions );
-
     // Try HTML5 geolocation
     if(navigator.geolocation) {  
       navigator.geolocation.getCurrentPosition(function(position)  {
@@ -90,6 +87,7 @@ function getEvents(pos, map) {
     var lat = pos.A.toString();
     var lon = pos.F.toString();
     var url = "https://api.nytimes.com/svc/events/v2/listings.jsonp?&ll="+lat+","+lon+"&radius=5000&api-key=58cc54cbffd5159ec6d8eec69468ca3c%3A10%3A63158134"
+   
     //gets data from api
     function getEventsData(){
         $.ajax({
@@ -97,6 +95,7 @@ function getEvents(pos, map) {
             dataType: 'jsonp'
             }).success(function(events) {
                var array = events.results
+               
                 //position tags 
                 setTags(array);
         });
@@ -105,11 +104,15 @@ function getEvents(pos, map) {
     //position tags on map
     function setTags(array){
         var marker, i;
+        var image = 'assets/hicon.png';
         for (i = 0; i < array.length; i++) {  
+
             
             marker = new google.maps.Marker({
                 position: new google.maps.LatLng(array[i].geocode_latitude, array[i].geocode_longitude),
-                map: map
+                map: map,
+                animation: google.maps.Animation.DROP,
+                icon: image
             });
 
             google.maps.event.addListener(marker, 'click', (function(marker, i) {
@@ -127,15 +130,17 @@ function getEvents(pos, map) {
                     //     array[i].price);
                 var infoBubble = new google.maps.InfoWindow({
                     map: map,
-                    content: '<ul class="bubbke"><li><a href="'+array[i].event_detail_url+'" target="_new" >'+array[i].event_name+'</a></li><li>'+array[i].date_time_description+'</li></ul>',
+                    content: "<ul class='bubble'><li><a href='"+
+                            array[i].event_detail_url+
+                            "' target='_new'>"+array[i].event_name+"</a></li><li>"+array[i].web_description+"</li></ul>",
                     position: marker.getPosition(),
                     shadowStyle: 1,
-                    padding: 0,
-                    backgroundColor: 'rgb(229, 0, 153)',
-                    borderRadius: 5,
+                    padding: 10,
+                    backgroundColor: 'rgb(0, 0, 0)',
+                    borderRadius: 15,
                     arrowSize: 10,
-                    borderWidth: 1,
-                    borderColor: '#000000',
+                    borderWidth: 2,
+                    borderColor: '#E50099',
                     disableAutoPan: true,
                     hideCloseButton: true,
                     arrowPosition: 30,
