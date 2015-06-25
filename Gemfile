@@ -33,8 +33,14 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'capistrano-rails', group: :development
 # gem 'pg'
 
-# query web services and examine the resulting output. 
-gem 'httparty'
+gem 'pry'
+
+# send some data to your js files
+gem 'gon'
+
+# Really simple JSON and XML parsing 
+gem 'crack'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'

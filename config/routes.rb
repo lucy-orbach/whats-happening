@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
-  resources :events
+  root 'welcome#index' 
+
+
+  resources :events, :neighborhoods, :categories
   get 'welcome/index'
 
- root 'welcome#index'
+ 
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class EventsControllerTest < ActionController::TestCase
+class NeighborhoodsControllerTest < ActionController::TestCase
   test "should get home" do
     get :home
     assert_response :success

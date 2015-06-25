@@ -2,10 +2,30 @@
 
 one:
   name: MyString
-  detail_url: MyString
-  ll: MyString
+  venue_id: 
+  category_id: 
+  description: MyText
+  image30: MyString
+  image80: MyString
+  image170: MyString
+  price: MyString
+  date-start: 2015-06-21
+  date-end: 2015-06-21
+  latitude: 1
+  longitude: 1
+  href: MyString
 
 two:
   name: MyString
-  detail_url: MyString
-  ll: MyString
+  venue_id: 
+  category_id: 
+  description: MyText
+  image30: MyString
+  image80: MyString
+  image170: MyString
+  price: MyString
+  date-start: 2015-06-21
+  date-end: 2015-06-21
+  latitude: 1
+  longitude: 1
+  href: MyString

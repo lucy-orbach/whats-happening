@@ -11,14 +11,50 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150610032523) do
+ActiveRecord::Schema.define(version: 20150621150643) do
 
-  create_table "events", force: :cascade do |t|
+  create_table "categories", force: :cascade do |t|
     t.string   "name"
-    t.string   "detail_url"
-    t.string   "ll"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "events", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "venue_id"
+    t.integer  "category_id"
+    t.text     "description"
+    t.string   "image30"
+    t.string   "image80"
+    t.string   "image170"
+    t.string   "price"
+    t.date     "date_s"
+    t.date     "date_e"
+    t.string   "lat"
+    t.string   "long"
+    t.string   "href"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "events", ["category_id"], name: "index_events_on_category_id"
+  add_index "events", ["venue_id"], name: "index_events_on_venue_id"
+
+  create_table "neighborhoods", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "venues", force: :cascade do |t|
+    t.string   "name"
+    t.string   "address"
+    t.string   "phone"
+    t.integer  "neighborhood_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "venues", ["neighborhood_id"], name: "index_venues_on_neighborhood_id"
 
 end

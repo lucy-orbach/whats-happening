@@ -1,22 +1,13 @@
 class Event < ActiveRecord::Base
-
-def getEvents
-	require "pry"
-	binding.pry
-
-	  
-	  #gets JSON
-		response = JSON.parse(open('https://api.nytimes.com/svc/events/v2/listings.jsonp?&ll='+lat+','+lon+'&radius=5000&api-key='+ENV['GMAIL_KEY']).read)
-		results = response['Result']
+  belongs_to :venue
+  belongs_to :category
+  has_one :neighborhood, through: :venue
 
 
-	# nyc='40.7127, 74.0059'
-	# response = HTTParty.get('https://api.nytimes.com/svc/events/v2/listings.jsonp?&ll='+lat+','+lon+'&radius=5000&api-key='+ENV['GMAIL_KEY'])
-
+	def getData(url)
+			uri = URI.parse(URI.encode(url).strip)
+			xml = uri.read
+		  response = Crack::XML.parse(xml)
+	end
 end
-	
-		
-	
 
-
-end

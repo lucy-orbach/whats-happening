@@ -1,50 +1,56 @@
-<div class="container-fluid">
-
-  <div class="wrapper">
-    <section id="intro" class="fixed">
-      <div class="curtain">
-        <section id="clickBanner" class="banner">
-        <h1>Wass hAPPening?!?!</h1>
-        <h2> >> Click Here << </h2>
-        <h2>To Get Event Listings around You</h2>
-        </section>
-        <ul class="row accordion">
-          <li class="col-md-2"><span class="pic one"></span></li>
-          <li class="col-md-2"><span class="pic two"></span></li>
-          <li class="col-md-2"><span class="pic three"></span></li>
-          <li class="col-md-2"><span class="pic four"></span></li>
-          <li class="col-md-2"><span class="pic five"></span></li>
-          <li class="col-md-2"><span class="pic six"></span></li>
-        </ul>
-      </div>
-    </section>
-
-    <ul class="row accordion transition">
-      <li class="col-md-2"><span class="one"></span></li>
-      <li class="col-md-2"><span class="two"></span></li>
-      <li class="col-md-2"><span class="three"></span></li>
-      <li class="col-md-2"><span class="four"></span></li>
-      <li class="col-md-2"><span class="five"></span></li>
-      <li class="col-md-2"><span class="six"></span></li>
-    </div>
-
-      <section id="eventsMap">
-        <h1>Wass happening?!?!</h1>
-        <div class="row">
-          <main class="col-md-12 map-container">
-            <div id="map-canvas" style="width: 100%x; height: 600px;">
-              <!-- <div class="vertical-align">
-                <i class="fa fa-spinner fa-spin fa-5x"></i>
-              </div> -->
-            </div>
-          </main><!--map-container -->
-          <aside>
-            <h3 id="status"></h3>
-            
-            <div class="error-message"></div>
-          </aside>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>artEventListener</title>
+  <%= include_gon %>
+  <%=favicon_link_tag %>
+  <!-- d3 -->
+  <%= javascript_include_tag 'http://d3js.org/d3.v3.min.js', charset: 'utf-8' %> 
+  <!-- styles-->
+  <%= stylesheet_link_tag 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css' %>
+  <%= stylesheet_link_tag  'https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css' %>
+  <%= stylesheet_link_tag 'https://fonts.googleapis.com/css?family=Monofett|Raleway' %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div class="container-fluid">
+    <div class="wrapper">
+      <section id="intro" class="fixed">
+        <div class="curtain">
+          <section id="clickBanner" class="banner">
+          <h2>the</h2>
+          <h1>artEventListener</h1>
+          <h2> >> Enter << </h2>
+          
+          </section>
+          <ul class="row accordion">
+            <li class="col-md-2"><span class="pic one"></span></li>
+            <li class="col-md-2"><span class="pic two"></span></li>
+            <li class="col-md-2"><span class="pic three"></span></li>
+            <li class="col-md-2"><span class="pic four"></span></li>
+            <li class="col-md-2"><span class="pic five"></span></li>
+            <li class="col-md-2"><span class="pic six"></span></li>
+          </ul>
         </div>
       </section>
-    </div>
-  </div>
-</div><!--container fluid -->
+
+      <!-- <ul class="row accordion transition">
+        <li class="col-md-2"><span class="one"></span></li>
+        <li class="col-md-2"><span class="two"></span></li>
+        <li class="col-md-2"><span class="three"></span></li>
+        <li class="col-md-2"><span class="four"></span></li>
+        <li class="col-md-2"><span class="five"></span></li>
+        <li class="col-md-2"><span class="six"></span></li>
+      </ul> -->  
+    </div><!--wrapper -->
+    <section id="indexes">
+        <div class="container">
+          <h2>Events By Neighborhoods</h2>
+          <section id="nChart"></section>
+        </div>
+    </section>
+  </div><!--container fluid -->
+</body>
+</html>
