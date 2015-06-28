@@ -5,7 +5,8 @@
   <%= include_gon %>
   <%=favicon_link_tag %>
   <!-- d3 -->
-  <%= javascript_include_tag 'http://d3js.org/d3.v3.min.js', charset: 'utf-8' %> 
+  <%= javascript_include_tag 'http://d3js.org/d3.v3.min.js', charset: 'utf-8' %>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script> 
   <!-- styles-->
   <%= stylesheet_link_tag 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css' %>
   <%= stylesheet_link_tag  'https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css' %>
@@ -20,7 +21,6 @@
       <section id="intro" class="fixed">
         <div class="curtain">
           <section id="clickBanner" class="banner">
-          <h2>the</h2>
           <h1>artEventListener</h1>
           <h2> >> Enter << </h2>
           
@@ -43,12 +43,16 @@
         <li class="col-md-2"><span class="four"></span></li>
         <li class="col-md-2"><span class="five"></span></li>
         <li class="col-md-2"><span class="six"></span></li>
-      </ul> -->  
+      </ul>   -->
     </div><!--wrapper -->
     <section id="indexes">
         <div class="container">
+          <h2>NYC Art Events</h2>
+          <section id="sunChart"></section>
           <h2>Events By Neighborhoods</h2>
           <section id="nChart"></section>
+          <h2>Events By Category</h2>
+          <section id="catChart"></section>
         </div>
     </section>
   </div><!--container fluid -->
