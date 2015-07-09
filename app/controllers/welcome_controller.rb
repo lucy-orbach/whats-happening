@@ -2,7 +2,6 @@ require 'pry'
 
 class WelcomeController < ApplicationController
   def index
-    
   	gon.neighborhoods = getIndexes(Neighborhood)
   	gon.categories = getIndexes(Category)
     gon.flare = getFlare
@@ -30,16 +29,19 @@ class WelcomeController < ApplicationController
 	end
 
   def getFlare
-    array = []
+    array = { "name" => "NYC", "children" => []}
     Neighborhood.all.each do |n|
       v_array = []
 
       n.venues.each do |v|
         e_array = []
-        v.events.map {|e| e_array<< { "name"=>e.name, "size"=>2000 } }
+        v.events.map do |e| 
+          e_array<< { "name"=>e.name, "size"=>2000 }
+          e_array.uniq!
+        end
         v_array << { "name"=>v.name, "children"=>e_array }
       end 
-      array << { "name" => n.name, "children" => v_array  }
+      array["children"] << { "name" => n.name, "children" => v_array  }
     end
     array
   end
