@@ -1,6 +1,13 @@
+'use strict'
 $(document).ready(function(){
     showElement( $('.banner') );
     $('.banner').click(introAnimation);
+    slideMYdiv ( $('#nLink'), $('.neighborhoods'), $('#cLink'), $('.categories') )
+    slideMYdiv ( $('#cLink'), $('.categories'), $('#nLink'), $('.neighborhoods') )
+    $("#meLink").click(function(){
+      $('.neighborhoods').removeClass('slide-in').addClass('slide-out');
+      $('.categories').removeClass('slide-in').addClass('slide-out');
+    });
 
   //   var waypoint = new Waypoint({
   // 	element: document.getElementById('nChart'),
@@ -10,8 +17,6 @@ $(document).ready(function(){
 	//})
 
 });//document ready
-
-
 
 //================================
 //    INTO ANIMATION
@@ -28,15 +33,38 @@ function introAnimation (){
 
     setTimeout( hideElement($('.banner')), 800);
     setTimeout( hideElement($('.wrapper')), 1600);
-    hoodSection = '#nChart';
-    hLink = '/neighborhoods/';
-    catSection = '#catChart';
-    cLink = '/categories/';
-    hChart(gon.neighborhoods, hoodSection, hLink );
-    hChart(gon.categories, catSection, cLink );
+    // var hoodSection = '#nChart';
+    // var hLink = '/neighborhoods/';
+    // var catSection = '#catChart';
+    // var cLink = '/categories/';
+    // hChart(gon.neighborhoods, hoodSection, hLink );
+    // hChart(gon.categories, catSection, cLink );
     sunChart();
   	
 }
+
+//================================
+//     slideMYdiv 
+//================================
+// slides back and forth divs inside a visible area
+
+
+function slideMYdiv ( linkToslideA, slideA, linkToslideB, slideB, gonData, chartSection, link  ) {
+  linkToslideA.click( function() {
+    linkToslideA.toggleClass('active');
+    linkToslideB.toggleClass('active');
+    slideA.removeClass('slide-out').addClass('slide-in');
+    slideB.removeClass('slide-in').addClass('slide-out');
+    var hoodSection = '#nChart';
+    var hLink = '/neighborhoods/';
+    var catSection = '#catChart';
+    var cLink = '/categories/';
+    hChart(gon.neighborhoods, hoodSection, hLink );
+    hChart(gon.categories, catSection, cLink );
+  }); 
+};
+
+
 
 //================================
 //    d3
@@ -148,46 +176,62 @@ function sunChart(){
 	      .style("opacity", 1)
 	      .on("mouseover", mouseover);
 
+    //get Total events for NYC
+    var totalEvents = countEvents(json);
+    displayLegend('NYC', totalEvents);
 	  // Add the mouseleave handler to the bounding circle.
 	  d3.select("#chartContainer").on("mouseleave", mouseleave);
 
 	  // Get total size of the tree = value of root node from partition.
 	  totalSize = path.node().__data__.value;
+
 	};
+
+  //get Total events for NYC
+  function countEvents(json){
+    var count = 0;
+    var neighborhoods = json.children;
+
+    for (var n=0; n<neighborhoods.length; n++) {
+      var venues = neighborhoods[n].children;
+      for (var v=0; v<venues.length; v++) {
+        count += venues[v].children.length;
+      }
+    }
+    return count
+  }
+
+  function displayLegend(location, quant){
+    d3.select("#quant")
+      .text(quant);
+
+    d3.select("#location")
+    .text(location);
+
+    d3.select("#explanation")
+      .style("visibility", "");
+  }
 
 	// Fade all but the current sequence, and show it in the breadcrumb trail.
 	function mouseover(d) {
-		debugger;
-		//nyc 
-		if (d.depth == '0') {
+    if (d.depth === 3) {
+      var event = d.name;
+      d3.select("#eTxt")
+      .text(event);
+      d3.select(this).on("mouseleave", function(){
 
-		} else if (d.depth == '1') {
-			//neighborhood
-		} else if (d.depth == '2') {
-			//venue
-		} else  {
-			//event 
-			
-		}
-		;
-		var location = d.name;
-		var venues = d.children.length
-  	// var percentage = (100 * d.value / totalSize).toPrecision(3);
-  	// var percentageString = percentage + "%";
-  	// if (percentage < 0.1) {
-   //  	percentageString = "< 0.1%";
-  	// }
-
-  	//var quant = d.children.length
-
-  	//d3.select("#percentage")
-      ///.text(quant);
-
-  	d3.select("#explanation")
-      .style("visibility", "");
+        d3.select("#eTxt")
+          .html("<span id='quant' class='dynamic-txt bubble'></span>"+"Art Events in"+"<span id='location' class='dynamic-txt bubble'></span>");
+      });
+    } else {
+      var location = d.name;
+  		var venues = d.children.length
+    	var quant = d.children.length
+      displayLegend(location,quant);
+    }
 
   	var sequenceArray = getAncestors(d);
-  	updateBreadcrumbs(sequenceArray, percentageString);
+  	// updateBreadcrumbs(sequenceArray, percentageString);
 
   	// Fade all the segments.
   	d3.selectAll("path")
@@ -202,11 +246,10 @@ function sunChart(){
 	}
 
 	// Restore everything to full opacity when moving off the visualization.
-	function mouseleave(d) {
-
+	function mouseleave(d) {    
   // Hide the breadcrumb trail
-  d3.select("#trail")
-      .style("visibility", "hidden");
+  // d3.select("#trail")
+  //     .style("visibility", "hidden");
 
   // Deactivate all segments during transition.
   d3.selectAll("path").on("mouseover", null);
@@ -220,10 +263,11 @@ function sunChart(){
               d3.select(this).on("mouseover", mouseover);
             });
 
+  displayLegend('NYC', 519);
   d3.select("#explanation")
       .transition()
       .duration(1000)
-      .style("visibility", "hidden");
+      //.style("visibility", "hidden");
 }
 
 // Given a node in a partition layout, return an array of all of its ancestor
@@ -308,39 +352,6 @@ function updateBreadcrumbs(nodeArray, percentageString) {
 
 }
 
-// function drawLegend() {
-
-//   // Dimensions of legend item: width, height, spacing, radius of rounded rect.
-//   var li = {
-//     w: 75, h: 30, s: 3, r: 3
-//   };
-
-//   var legend = d3.select("#legend").append("svg:svg")
-//       .attr("width", li.w)
-//       .attr("height", d3.keys(colors).length * (li.h + li.s));
-
-//   var g = legend.selectAll("g")
-//       .data(d3.entries(colors))
-//       .enter().append("svg:g")
-//       .attr("transform", function(d, i) {
-//               return "translate(0," + i * (li.h + li.s) + ")";
-//            });
-
-//   g.append("svg:rect")
-//       .attr("rx", li.r)
-//       .attr("ry", li.r)
-//       .attr("width", li.w)
-//       .attr("height", li.h)
-//       .style("fill", function(d) { return d.value; });
-
-//   g.append("svg:text")
-//       .attr("x", li.w / 2)
-//       .attr("y", li.h / 2)
-//       .attr("dy", "0.35em")
-//       .attr("text-anchor", "middle")
-//       .text(function(d) { return d.key; });
-// }
-
 function toggleLegend() {
   var legend = d3.select("#legend");
   if (legend.style("visibility") == "hidden") {
@@ -395,75 +406,5 @@ function buildHierarchy(csv) {
 };
 }
 
-// function sunChart(){
-
-// 	// Dimensions of sunburst.
-// 	var width = 750,
-//     	height = 650,
-//     	radius = (Math.min(width, height) / 2)-25,
-//     	color = d3.scale.category20c();
-
-
-// 	var svg = d3.select("#sunChart").append("svg")
-//     	.attr("width", width)
-//     	.attr("height", height)
-//   		.append("g")
-//     	.attr("transform", "translate(" + width / 2 + "," + height * .52 + ")");
-
-// 	var partition = d3.layout.partition()
-//     	.sort(null)
-//     	.size([2 * Math.PI, radius * radius])
-//     	.value(function(d) { return d.size/100; });
-
-// 	var arc = d3.svg.arc()
-// 	    .startAngle(function(d) { return d.x; })
-// 	    .endAngle(function(d) { return d.x + d.dx; })
-// 	    .innerRadius(function(d) { return Math.sqrt(d.y); })
-// 	    .outerRadius(function(d) { return Math.sqrt(d.y + d.dy); });
-
-// 	var root = gon.flare;
-
-//   var path = svg.datum(root).selectAll("path")
-//       .data(partition.nodes)
-//     .enter().append("path")
-//       .attr("display", function(d) { return d.depth ? null : "none"; }) // hide inner ring
-//       .attr("d", arc)
-//       .style("stroke", "#fff")
-//       .style("fill", function(d) { return color((d.children ? d : d.parent).name); })
-//       .style("fill-rule", "evenodd")
-//       .each(stash);
-
-//   d3.selectAll("input").on("change", function change() {
-//     var value = this.value === "count"
-//         ? function() { return 1; }
-//         : function(d) { return d.size; };
-
-//     path
-//         .data(partition.value(value).nodes)
-//       .transition()
-//         .duration(1500)
-//         .attrTween("d", arcTween);
-//   });
-
-// 	// Stash the old values for transition.
-// 	function stash(d) {
-// 	  d.x0 = d.x;
-// 	  d.dx0 = d.dx;
-// 	}
-
-// 	// Interpolate the arcs in data space.
-// 	function arcTween(a) {
-// 	  var i = d3.interpolate({x: a.x0, dx: a.dx0}, a);
-// 	  return function(t) {
-// 	    var b = i(t);
-// 	    a.x0 = b.x;
-// 	    a.dx0 = b.dx;
-// 	    return arc(b);
-// 	  };
-// 	}
-
-// 	d3.select(self.frameElement).style("height", height + "px");
-
-// }
 
 

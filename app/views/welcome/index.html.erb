@@ -4,15 +4,17 @@
   <title>artEventListener</title>
   <%= include_gon %>
   <%=favicon_link_tag %>
-  <!-- d3 -->
-  <%= javascript_include_tag 'http://d3js.org/d3.v3.min.js', charset: 'utf-8' %>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script> 
   <!-- styles-->
   <%= stylesheet_link_tag 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css' %>
   <%= stylesheet_link_tag  'https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css' %>
-  <%= stylesheet_link_tag 'https://fonts.googleapis.com/css?family=Monofett|Raleway' %>
+  <%= stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Quicksand:400,700|Monoton' %>
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+  <!-- d3 -->
+  <%= javascript_include_tag 'http://d3js.org/d3.v3.min.js', charset: 'utf-8' %>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script> 
+  <!-- js -->
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <!-- meta -->
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -21,9 +23,9 @@
       <section id="intro" class="fixed">
         <div class="curtain">
           <section id="clickBanner" class="banner">
-          <h1>artEventListener</h1>
-          <h2> >> Enter << </h2>
-          
+            <h2 class="bubble"> NYC </h2>
+            <h1>.artEventListener</h1>
+            <h2 class="bubble"> - Enter - </h2>
           </section>
           <ul class="row accordion">
             <li class="col-md-2"><span class="pic one"></span></li>
@@ -35,39 +37,41 @@
           </ul>
         </div>
       </section>
-
-      <!-- <ul class="row accordion transition">
-        <li class="col-md-2"><span class="one"></span></li>
-        <li class="col-md-2"><span class="two"></span></li>
-        <li class="col-md-2"><span class="three"></span></li>
-        <li class="col-md-2"><span class="four"></span></li>
-        <li class="col-md-2"><span class="five"></span></li>
-        <li class="col-md-2"><span class="six"></span></li>
-      </ul>   -->
     </div><!--wrapper -->
     <section id="indexes">
+      <div class="container">
+        <h1 class="bubble">NYC Art Events</h1>
+        <ul class="charts-container">
+          <li class="chart sun slide-in">
+            <div class="row">
+              <section id="sunChart" class="col-md-8">
+                <div id="explanation" class="center-txt"style="visibility: hidden;">
+                  <h2 id="eTxt"><span id="quant" class="dynamic-txt bubble"></span>Art Events in<span id="location" class="dynamic-txt bubble"></span></h2>
+                </div>
+              </section>
 
-
-        <div class="container">
-
-
-
-          <h2>NYC Art Events</h2>
-          <div id="sequence"></div>
-          <section id="sunChart">
-            <div id="explanation" style="visibility: hidden;">
-              <span id="percentage"></span><br/>Art Events
+              <div class="strip intro col-md-4">
+              <p>Hi!</br>Welcome to our visualization of NYC Art Events.You can browse them by Neighborhood, Category or Around You!</p></div>
             </div>
-         </section>
-        
-
-
-          <h2>Events By Neighborhoods</h2>
-          <section id="nChart">
-          </section>
-          <h2>Events By Category</h2>
-          <section id="catChart"></section>
-        </div>
+          </li>
+          <li class="chart neighborhoods slide-out">
+            <h2 >Browse by: <span class="bubble">Neighborhoods</span></h2>
+            <section id="nChart"></section>
+          </li>
+          <li class="chart categories slide-out">
+            <h2 >Browse by: <span class="bubble">Category</span></h2>
+            <section id="catChart"></section>
+          </li>
+        </ul>
+        <nav class="browse">
+              <h4>Browse by</h4>
+              <ul>
+                <li id="nLink" class="bubble">Neighborhood</li>
+                <li id="meLink" class="bubble">Home</li>
+                <li id="cLink" class="bubble">Category</li>
+              </ul>
+            </nav>
+      </div>
     </section>
   </div><!--container fluid -->
 </body>

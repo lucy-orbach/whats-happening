@@ -36,7 +36,7 @@ class WelcomeController < ApplicationController
       n.venues.each do |v|
         e_array = []
         v.events.map do |e| 
-          e_array<< { "name"=>e.name, "size"=>2000 }
+          e_array<< { "name"=>e.name, "size"=>e.karma }
           e_array.uniq!
         end
         v_array << { "name"=>v.name, "children"=>e_array }

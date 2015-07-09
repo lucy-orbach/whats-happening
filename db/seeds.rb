@@ -46,8 +46,10 @@ def createEvents(data)
 		end
 		
 		
-		category = Category.find_by(name: event_arr[i]["Media"][0])
 
+		category = Category.find_by(name: event_arr[i]["Media"][0])
+		
+		karma = event_arr[i]["Karma"].to_f * 1000
 		event = Event.create(
 			:name => event_arr[i]["Name"],
 			:venue_id => venue.id,
@@ -60,7 +62,8 @@ def createEvents(data)
 			:date_e => event_arr[i]["DateEnd"],
 			:lat => event_arr[i]["Latitude"],
 			:long => event_arr[i]["Longitude"],
-			:href => event_arr[i]["href"]
+			:href => event_arr[i]["href"],
+			:karma => karma
 		)
 		event.update(:category_id => category.id) if category
 		event.save
