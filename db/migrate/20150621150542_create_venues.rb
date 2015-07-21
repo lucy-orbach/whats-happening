@@ -4,7 +4,6 @@ class CreateVenues < ActiveRecord::Migration
       t.string :name
       t.string :address
       t.string :phone
-      t.references :neighborhood, index: true, foreign_key: true
       t.timestamps null: false
     end
   end

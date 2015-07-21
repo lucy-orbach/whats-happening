@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150709141432) do
+ActiveRecord::Schema.define(version: 20150721231250) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -21,8 +21,6 @@ ActiveRecord::Schema.define(version: 20150709141432) do
 
   create_table "events", force: :cascade do |t|
     t.string   "name"
-    t.integer  "venue_id"
-    t.integer  "category_id"
     t.text     "description"
     t.string   "image30"
     t.string   "image80"
@@ -36,6 +34,8 @@ ActiveRecord::Schema.define(version: 20150709141432) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "karma"
+    t.integer  "venue_id"
+    t.integer  "category_id"
   end
 
   add_index "events", ["category_id"], name: "index_events_on_category_id"
@@ -51,9 +51,9 @@ ActiveRecord::Schema.define(version: 20150709141432) do
     t.string   "name"
     t.string   "address"
     t.string   "phone"
-    t.integer  "neighborhood_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.integer  "neighborhood_id"
   end
 
   add_index "venues", ["neighborhood_id"], name: "index_venues_on_neighborhood_id"
