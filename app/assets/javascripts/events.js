@@ -1,10 +1,9 @@
 $(document).ready(function(){
-    getMap();
+    //getMap();
 });//document ready
 
 function getMap() {
-    var map;
-    
+    var map; 
   function initialize() {
     var mapCanvas = document.getElementById('map-canvas');
     var mapOptions = {
