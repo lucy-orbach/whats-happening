@@ -2,19 +2,14 @@
 $(document).ready(function(){
     showElement( $('.banner') );
     $('.banner').click(introAnimation);
-    slideMYdiv ( $('#nLink'), $('.neighborhoods'), $('#cLink'), $('.categories') )
-    slideMYdiv ( $('#cLink'), $('.categories'), $('#nLink'), $('.neighborhoods') )
-    $("#meLink").click(function(){
-      $('.neighborhoods').removeClass('slide-in').addClass('slide-out');
-      $('.categories').removeClass('slide-in').addClass('slide-out');
-    });
+    // slideMYdiv ( $('#nLink'), $('.neighborhoods'), $('#cLink'), $('.categories') )
+    // slideMYdiv ( $('#cLink'), $('.categories'), $('#nLink'), $('.neighborhoods') )
+    // $("#meLink").click(function(){
+    //   $('.neighborhoods').removeClass('slide-in').addClass('slide-out');
+    //   $('.categories').removeClass('slide-in').addClass('slide-out');
+    // });
 
-  //   var waypoint = new Waypoint({
-  // 	element: document.getElementById('nChart'),
-  // 	handler: function() {
-  //   alert('Basic waypoint triggered');
-  // }
-	//})
+  
 
 });//document ready
 
@@ -49,21 +44,51 @@ function introAnimation (){
 // slides back and forth divs inside a visible area
 
 
-function slideMYdiv ( linkToslideA, slideA, linkToslideB, slideB, gonData, chartSection, link  ) {
-  linkToslideA.click( function() {
-    linkToslideA.toggleClass('active');
-    linkToslideB.toggleClass('active');
-    slideA.removeClass('slide-out').addClass('slide-in');
-    slideB.removeClass('slide-in').addClass('slide-out');
-    var hoodSection = '#nChart';
-    var hLink = '/neighborhoods/';
-    var catSection = '#catChart';
-    var cLink = '/categories/';
-    hChart(gon.neighborhoods, hoodSection, hLink );
-    hChart(gon.categories, catSection, cLink );
-  }); 
-};
+// function slideMYdiv ( linkToslideA, slideA, linkToslideB, slideB, gonData, chartSection, link  ) {
+//   linkToslideA.click( function() {
+//     linkToslideA.toggleClass('active');
+//     linkToslideB.toggleClass('active');
+//     slideA.removeClass('slide-out').addClass('slide-in');
+//     slideB.removeClass('slide-in').addClass('slide-out');
+//     var hoodSection = ;
+//     var hLink = ;
+//     var catSection = '';
+//     var cLink = ;
+//     
+//     
+//   }); 
+// };
 
+
+$(function sliderFromScratch(){
+  var container = $('#charts-container');
+  var slides = container.children();
+  var navLinks = $('.nav');
+  var slideWidth =container.width();
+
+  //inject screen width into slides
+  slides.css("width", slideWidth * 3.5);
+  slides.children().css("width", slideWidth);
+
+  //slide charts
+  $('.nav').click( function(){
+    hChart(gon.neighborhoods, $('#nChart'), '/neighborhoods/' ); 
+    hChart(gon.categories, $('#catChart'), '/categories/' );  
+    switch ( $(this).attr('id') ) {
+      case "meLink":
+          slides.css("left", '0px');
+          break; 
+      case "nLink":
+          slides.css("left", -slideWidth);
+           
+          break; 
+      case "cLink":
+          slides.css("left", -slideWidth * 2);
+              
+          break;
+    }
+  });
+})
 
 
 //================================
@@ -72,7 +97,8 @@ function slideMYdiv ( linkToslideA, slideA, linkToslideB, slideB, gonData, chart
 
 
 function hChart (chartType, section, linkRoot) {
-	var data = chartType;
+  
+	
 
 	var canvas = d3.select(section).append('svg')
 		.attr('width', 1100)
@@ -80,7 +106,7 @@ function hChart (chartType, section, linkRoot) {
 
 	var color = d3.scale.linear()
     	.domain([0, 17])
-    	.range(['#E50099', '#E50026', '#E54D00', '#E50099'	]);
+    	.range(['#E50099', '#E50026', '#E54D00', '#E50099']);
 
 	canvas.selectAll('rect')
 		.data(data)
@@ -309,48 +335,48 @@ function breadcrumbPoints(d, i) {
 }
 
 // Update the breadcrumb trail to show the current sequence and percentage.
-function updateBreadcrumbs(nodeArray, percentageString) {
+// function updateBreadcrumbs(nodeArray, percentageString) {
 
-  // Data join; key function combines name and depth (= position in sequence).
-  var g = d3.select("#trail")
-      .selectAll("g")
-      .data(nodeArray, function(d) { return d.name + d.depth; });
+//   // Data join; key function combines name and depth (= position in sequence).
+//   var g = d3.select("#trail")
+//       .selectAll("g")
+//       .data(nodeArray, function(d) { return d.name + d.depth; });
 
-  // Add breadcrumb and label for entering nodes.
-  var entering = g.enter().append("svg:g");
+//   // Add breadcrumb and label for entering nodes.
+//   var entering = g.enter().append("svg:g");
 
-  entering.append("svg:polygon")
-      .attr("points", breadcrumbPoints)
-      .style("fill", function(d) { return colors[d.name]; });
+//   entering.append("svg:polygon")
+//       .attr("points", breadcrumbPoints)
+//       .style("fill", function(d) { return colors[d.name]; });
 
-  entering.append("svg:text")
-      .attr("x", (b.w + b.t) / 2)
-      .attr("y", b.h / 2)
-      .attr("dy", "0.35em")
-      .attr("text-anchor", "middle")
-      .text(function(d) { return d.name; });
+//   entering.append("svg:text")
+//       .attr("x", (b.w + b.t) / 2)
+//       .attr("y", b.h / 2)
+//       .attr("dy", "0.35em")
+//       .attr("text-anchor", "middle")
+//       .text(function(d) { return d.name; });
 
-  // Set position for entering and updating nodes.
-  g.attr("transform", function(d, i) {
-    return "translate(" + i * (b.w + b.s) + ", 0)";
-  });
+//   // Set position for entering and updating nodes.
+//   g.attr("transform", function(d, i) {
+//     return "translate(" + i * (b.w + b.s) + ", 0)";
+//   });
 
-  // Remove exiting nodes.
-  g.exit().remove();
+//   // Remove exiting nodes.
+//   g.exit().remove();
 
-  // Now move and update the percentage at the end.
-  d3.select("#trail").select("#endlabel")
-      .attr("x", (nodeArray.length + 0.5) * (b.w + b.s))
-      .attr("y", b.h / 2)
-      .attr("dy", "0.35em")
-      .attr("text-anchor", "middle")
-      .text(percentageString);
+//   // Now move and update the percentage at the end.
+//   d3.select("#trail").select("#endlabel")
+//       .attr("x", (nodeArray.length + 0.5) * (b.w + b.s))
+//       .attr("y", b.h / 2)
+//       .attr("dy", "0.35em")
+//       .attr("text-anchor", "middle")
+//       .text(percentageString);
 
-  // Make the breadcrumb trail visible, if it's hidden.
-  d3.select("#trail")
-      .style("visibility", "");
+//   // Make the breadcrumb trail visible, if it's hidden.
+//   d3.select("#trail")
+//       .style("visibility", "");
 
-}
+// }
 
 function toggleLegend() {
   var legend = d3.select("#legend");

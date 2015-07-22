@@ -40,7 +40,8 @@
     <section id="indexes">
       <div class="container">
         <h1 class="bubble">NYC Art Events</h1>
-        <ul class="charts-container">
+        <div id="charts-container" class="charts-container">
+        <ul class="charts-list">
           <li class="chart sun slide-in">
             <div class="row">
               <section id="sunChart" class="col-md-8">
@@ -50,7 +51,8 @@
               </section>
 
               <div class="strip intro col-md-4">
-              <p>Hi!</br>Welcome to our visualization of NYC Art Events.You can browse them by Neighborhood, Category or Around You!</p></div>
+              <p>Welcome!</br>This is a d3 visualization of NYC Art Events.You may browse them by Neighborhood, Category or Around You!</p>
+              <h5 style="margin-left: 20px;"> App in progress...</h5></div>
             </div>
           </li>
           <li class="chart neighborhoods slide-out">
@@ -62,12 +64,13 @@
             <section id="catChart"></section>
           </li>
         </ul>
+        </div>
         <nav class="browse">
               <h4>Browse by</h4>
               <ul>
-                <li id="nLink" class="bubble">Neighborhood</li>
-                <li id="meLink" class="bubble">Home</li>
-                <li id="cLink" class="bubble">Category</li>
+                <li id="nLink" class="nav bubble">Neighborhood</li>
+                <li id="meLink" class="nav bubble">Home</li>
+                <li id="cLink" class="nav bubble">Category</li>
               </ul>
             </nav>
       </div>

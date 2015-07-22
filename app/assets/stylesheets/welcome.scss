@@ -238,15 +238,21 @@ ul.accordion {
 	}
 }
 //charts
-.charts-container {
+#charts-container {
 	position: relative;
 	width: 100%;
 	height: 77vh;
 	overflow: hidden;
 }
+.charts-list {
+	position: absolute;
+
+	
+
+}
 .chart{
-	background-color: #000000;
-	 
+	height: 77vh;
+	float: left;
 	&.sun {
 		.intro {
 			margin-top: 150px;
@@ -258,28 +264,25 @@ ul.accordion {
 			}
 		}
 	}
-	// &.neighborhoods,
-	// &.categories {
-	// 	overflow-y: scroll;
+
+	// &.slide-in {
+	// 	position: absolute;
+	// 	left: 0px;
+	// 	top: 0px;
+	// 	transition: left 0.5s;
+	// 	-webkit-transition: left 1s; /* Safari */	
 	// }
-	&.slide-in {
-		position: absolute;
-		left: 0px;
-		top: 0px;
-		transition: left 0.5s;
-		-webkit-transition: left 1s; /* Safari */	
-	}
-	&.slide-out {
-		position: absolute;
-		transition: left 0.5s;
-		-webkit-transition: left 1s; /* Safari */
-	}
-	&.neighborhoods.slide-out{
-		left: -200%;
-	}
-	&.categories.slide-out{
-		left: 700%;
-	}
+	// &.slide-out {
+	// 	position: absolute;
+	// 	transition: left 0.5s;
+	// 	-webkit-transition: left 1s; /* Safari */
+	// }
+	// &.neighborhoods.slide-out{
+	// 	left: -200%;
+	// }
+	// &.categories.slide-out{
+	// 	left: 700%;
+	// }
 	
 }
 nav.browse {
